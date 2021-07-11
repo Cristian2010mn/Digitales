@@ -1,0 +1,41 @@
+[PROJECT]
+Target=maetro.hex
+Processor_Text=PIC16F877
+CCSVersion=5.025
+Compiler=PCM
+[Target Data]
+FileList=maetro.c
+[maetro.c]
+Type=4
+[mru-list]
+1=maetro.c
+
+[Opened Files]
+1=maetro.c
+2=Nueva carpeta\maestro.c
+3=
+4=
+
+[ProjectLog]
+Days=2
+D1=22-06-2021
+D1_L=4
+D1_L1=[59900]Stopped Editing.
+TotalEdit=38
+TotalDebug=0
+D1_E=29
+D1_D=0
+D1_L2=[59900]Project Closed.
+D1_L3=[59918]Project Opened.
+D1_L4=[60541]Project Closed.
+D2=24-06-2021
+D2_L=4
+D2_L1=[68189]Project Opened.
+D2_L2=[68220]Started Editing.
+D2_L3=[68735]Stopped Editing.
+D2_E=9
+D2_D=0
+D2_L4=[68736]Project Closed.
+[Units]
+Count=1
+1=maetro (main)

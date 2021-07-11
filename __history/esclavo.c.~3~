@@ -1,0 +1,10 @@
+#include <16f877a.h>
+#fuses XT,NOWDT,NOPROTECT,PUT,NOBROWNOUT,NOLVP
+#use delay(clock=4000000)
+#include <lcd.c>
+
+#use i2c(SLAVE, SDA=PIN_C4, SCL=PIN_C3, ADDRESS=0Xa0)
+
+
+
+

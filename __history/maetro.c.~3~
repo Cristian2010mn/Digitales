@@ -1,0 +1,37 @@
+#include <16f877a.h>
+#use delay(clock= 4000000)
+#use i2c (MASTER,SDA=PIN_C4, SLOW, SCL = PIN_C5, NOFORCE_SW)
+
+#define use_port_b_kbd TRUE
+#include <kbd.c>
+
+#use standard_io(b)
+#use standard_io(b)
+
+int8 comando;
+
+void main(){
+   trisd=0x00;
+   portd=0x00;
+   comando=0;
+   portc=0x00;
+   
+   kbd_init();
+   port_b_pullups(true);
+   
+   while(1){
+      comando=kbd_getc();
+      if (comando!=0){
+         i2c_start();
+         i2c_write(0xa0);
+         i2c_write(comando);
+         i2c_stop();
+         delay_ms(100);
+      }
+   }
+}
+
+
+
+
+

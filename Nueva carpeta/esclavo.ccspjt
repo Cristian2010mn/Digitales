@@ -1,0 +1,54 @@
+[PROJECT]
+Target=esclavo.hex
+Processor_Text=PIC16F877
+CCSVersion=5.025
+Compiler=PCM
+[Target Data]
+FileList=esclavo.c
+[esclavo.c]
+Type=4
+[mru-list]
+1=esclavo.c
+
+[ProjectLog]
+Days=3
+D1=22-06-2021
+D1_L=17
+D1_L1=[61752]Started Editing.
+D1_L2=[62104]Stopped Editing.
+D1_L3=[62980]Started Editing.
+D1_L4=[63553]Stopped Editing.
+D1_L5=[63889]Started Editing.
+D1_L6=[64480]Stopped Editing.
+D1_L7=[65451]Started Editing.
+D1_L8=[65643]Stopped Editing.
+TotalEdit=22
+TotalDebug=0
+D1_E=22
+D1_D=0
+D1_L9=[65643]Project Closed.
+D1_L10=[65687]Project Opened.
+D1_L11=[65695]Started Editing.
+D1_L12=[65968]Stopped Editing.
+D1_L13=[65968]Project Closed.
+D1_L14=[66049]Project Opened.
+D1_L15=[66098]Started Editing.
+D1_L16=[66561]Stopped Editing.
+D1_L17=[67679]Project Closed.
+D2=24-06-2021
+D2_L=2
+D2_L1=[68107]Project Opened.
+D2_L2=[68116]Project Closed.
+D3=28-06-2021
+D3_L=1
+D3_L1=[47282]Project Opened.
+
+[Opened Files]
+1=esclavo.c
+2=maestro.c
+3=
+4=..\maetro.c
+5=
+[Units]
+Count=1
+1=esclavo (main)

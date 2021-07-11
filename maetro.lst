@@ -1,0 +1,491 @@
+CCS PCM C Compiler, Version 5.025, 49617               24-jun.-21 19:00
+
+               Filename:   C:\Users\Cjmol_000\Desktop\pic\Digitales\maetro.lst
+
+               ROM used:   269 words (3%)
+                           Largest free fragment is 2048
+               RAM used:   11 (3%) at main() level
+                           15 (4%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   0C8
+0003:  NOP
+.................... #include <16f877.h> 
+.................... //////////// Standard Header file for the PIC16F877 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877 
+0004:  BCF    0A.0
+0005:  BCF    0A.1
+0006:  BCF    0A.2
+0007:  ADDWF  02,F
+0008:  RETLW  31
+0009:  RETLW  32
+000A:  RETLW  33
+000B:  RETLW  34
+000C:  RETLW  35
+000D:  RETLW  36
+000E:  RETLW  37
+000F:  RETLW  38
+0010:  RETLW  39
+0011:  RETLW  2A
+0012:  RETLW  30
+0013:  RETLW  23
+*
+0067:  CLRF   77
+0068:  CLRF   78
+0069:  MOVF   28,W
+006A:  BCF    03.0
+006B:  BTFSC  29.0
+006C:  ADDWF  77,F
+006D:  RRF    77,F
+006E:  RRF    78,F
+006F:  BTFSC  29.1
+0070:  ADDWF  77,F
+0071:  RRF    77,F
+0072:  RRF    78,F
+0073:  BTFSC  29.2
+0074:  ADDWF  77,F
+0075:  RRF    77,F
+0076:  RRF    78,F
+0077:  BTFSC  29.3
+0078:  ADDWF  77,F
+0079:  RRF    77,F
+007A:  RRF    78,F
+007B:  BTFSC  29.4
+007C:  ADDWF  77,F
+007D:  RRF    77,F
+007E:  RRF    78,F
+007F:  BTFSC  29.5
+0080:  ADDWF  77,F
+0081:  RRF    77,F
+0082:  RRF    78,F
+0083:  BTFSC  29.6
+0084:  ADDWF  77,F
+0085:  RRF    77,F
+0086:  RRF    78,F
+0087:  BTFSC  29.7
+0088:  ADDWF  77,F
+0089:  RRF    77,F
+008A:  RRF    78,F
+....................  
+.................... #list 
+....................  
+....................  
+.................... #fuses XT, PUT, NOPROTECT, BROWNOUT, NOLVP, NOWDT 
+....................  
+.................... #use delay(clock = 4000000) 
+*
+00B1:  MOVLW  26
+00B2:  MOVWF  04
+00B3:  BCF    03.7
+00B4:  MOVF   00,W
+00B5:  BTFSC  03.2
+00B6:  GOTO   0C5
+00B7:  MOVLW  01
+00B8:  MOVWF  78
+00B9:  CLRF   77
+00BA:  DECFSZ 77,F
+00BB:  GOTO   0BA
+00BC:  DECFSZ 78,F
+00BD:  GOTO   0B9
+00BE:  MOVLW  4A
+00BF:  MOVWF  77
+00C0:  DECFSZ 77,F
+00C1:  GOTO   0C0
+00C2:  GOTO   0C3
+00C3:  DECFSZ 00,F
+00C4:  GOTO   0B7
+00C5:  BCF    0A.3
+00C6:  BCF    0A.4
+00C7:  GOTO   10B (RETURN)
+....................  
+.................... #use i2c (MASTER, SDA= PIN_C4, SLOW, SCL= PIN_C3, NOFORCE_SW) // Configuración global del bus a dos hilos. 
+*
+00A1:  BCF    14.7
+00A2:  BCF    0C.3
+00A3:  MOVF   26,W
+00A4:  MOVWF  13
+00A5:  MOVLW  02
+00A6:  BTFSC  14.7
+00A7:  GOTO   0AF
+00A8:  BTFSS  0C.3
+00A9:  GOTO   0A8
+00AA:  MOVLW  00
+00AB:  BSF    03.5
+00AC:  BTFSC  11.6
+00AD:  MOVLW  01
+00AE:  BCF    03.5
+00AF:  MOVWF  78
+00B0:  RETURN
+....................  
+.................... #define use_portb_kbd TRUE //Se utiliza el puerto B para conectar el teclado 
+.................... #include <kbd.c> //Se declara la libreria de teclado 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                             KBD.C                                 //// 
+.................... ////                  Generic keypad scan driver                       //// 
+.................... ////                                                                   //// 
+.................... ////  kbd_init()   Must be called before any other function.           //// 
+.................... ////                                                                   //// 
+.................... ////  c = kbd_getc(c)  Will return a key value if pressed or /0 if not //// 
+.................... ////                   This function should be called frequently so as //// 
+.................... ////                   not to miss a key press.                        //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... ////////////////// The following defines the keypad layout on port D 
+....................  
+.................... // Un-comment the following define to use port B 
+.................... // #define use_portb_kbd TRUE 
+....................  
+.................... // Make sure the port used has pull-up resistors (or the LCD) on 
+.................... // the column pins 
+....................  
+.................... #if defined use_portb_kbd 
+....................    #byte kbd = getenv("SFR:PORTB") 
+.................... #else 
+....................    #byte kbd = getenv("SFR:PORTD") 
+.................... #endif 
+....................  
+.................... #if defined use_portb_kbd 
+....................    #define set_tris_kbd(x) set_tris_b(x) 
+.................... #else 
+....................    #define set_tris_kbd(x) set_tris_d(x) 
+.................... #endif 
+....................  
+.................... //Keypad connection:   (for example column 0 is B2) 
+.................... //                Bx: 
+....................  
+.................... #ifdef blue_keypad  ///////////////////////////////////// For the blue keypad 
+.................... #define COL0 (1 << 2) 
+.................... #define COL1 (1 << 3) 
+.................... #define COL2 (1 << 6) 
+....................  
+.................... #define ROW0 (1 << 4) 
+.................... #define ROW1 (1 << 7) 
+.................... #define ROW2 (1 << 1) 
+.................... #define ROW3 (1 << 5) 
+....................  
+.................... #else ////////////////////////////////////////////////// For the black keypad 
+.................... #define COL0 (1 << 5) 
+.................... #define COL1 (1 << 6) 
+.................... #define COL2 (1 << 7) 
+....................  
+.................... #define ROW0 (1 << 1) 
+.................... #define ROW1 (1 << 2) 
+.................... #define ROW2 (1 << 3) 
+.................... #define ROW3 (1 << 4) 
+....................  
+.................... #endif 
+....................  
+.................... #define ALL_ROWS (ROW0|ROW1|ROW2|ROW3) 
+.................... #define ALL_PINS (ALL_ROWS|COL0|COL1|COL2) 
+....................  
+.................... // Keypad layout: 
+.................... char const KEYS[4][3] = {{'1','2','3'}, 
+....................                          {'4','5','6'}, 
+....................                          {'7','8','9'}, 
+....................                          {'*','0','#'}}; 
+....................  
+.................... #define KBD_DEBOUNCE_FACTOR 33    // Set this number to apx n/333 where 
+....................                                   // n is the number of times you expect 
+....................                                   // to call kbd_getc each second 
+....................  
+....................  
+.................... void kbd_init() { 
+*
+0014:  BCF    0A.3
+0015:  BCF    0A.4
+0016:  GOTO   0EF (RETURN)
+.................... } 
+....................  
+.................... char kbd_getc( ) { 
+....................    static BYTE kbd_call_count; 
+*
+00E3:  BCF    03.5
+00E4:  CLRF   21
+....................    static int1 kbd_down; 
+00E5:  BCF    22.0
+....................    static char last_key; 
+00E6:  CLRF   23
+....................    static BYTE col; 
+00E7:  CLRF   24
+....................  
+....................    BYTE kchar; 
+....................    BYTE row; 
+....................  
+....................    kchar='\0'; 
+*
+0017:  CLRF   26
+....................    if(++kbd_call_count>KBD_DEBOUNCE_FACTOR) { 
+0018:  INCF   21,F
+0019:  MOVF   21,W
+001A:  SUBLW  21
+001B:  BTFSC  03.0
+001C:  GOTO   098
+....................        switch (col) { 
+001D:  MOVF   24,W
+001E:  BTFSC  03.2
+001F:  GOTO   027
+0020:  XORLW  01
+0021:  BTFSC  03.2
+0022:  GOTO   02D
+0023:  XORLW  03
+0024:  BTFSC  03.2
+0025:  GOTO   033
+0026:  GOTO   038
+....................          case 0   : set_tris_kbd(ALL_PINS&~COL0); 
+0027:  MOVLW  DE
+0028:  BSF    03.5
+0029:  MOVWF  06
+....................                     kbd=~COL0&ALL_PINS; 
+002A:  BCF    03.5
+002B:  MOVWF  06
+....................                     break; 
+002C:  GOTO   038
+....................          case 1   : set_tris_kbd(ALL_PINS&~COL1); 
+002D:  MOVLW  BE
+002E:  BSF    03.5
+002F:  MOVWF  06
+....................                     kbd=~COL1&ALL_PINS; 
+0030:  BCF    03.5
+0031:  MOVWF  06
+....................                     break; 
+0032:  GOTO   038
+....................          case 2   : set_tris_kbd(ALL_PINS&~COL2); 
+0033:  MOVLW  7E
+0034:  BSF    03.5
+0035:  MOVWF  06
+....................                     kbd=~COL2&ALL_PINS; 
+0036:  BCF    03.5
+0037:  MOVWF  06
+....................                     break; 
+....................        } 
+....................  
+....................        if(kbd_down) { 
+0038:  BTFSS  22.0
+0039:  GOTO   044
+....................          if((kbd & (ALL_ROWS))==(ALL_ROWS)) { 
+003A:  MOVF   06,W
+003B:  ANDLW  1E
+003C:  SUBLW  1E
+003D:  BTFSS  03.2
+003E:  GOTO   043
+....................            kbd_down=FALSE; 
+003F:  BCF    22.0
+....................            kchar=last_key; 
+0040:  MOVF   23,W
+0041:  MOVWF  26
+....................            last_key='\0'; 
+0042:  CLRF   23
+....................          } 
+....................        } else { 
+0043:  GOTO   097
+....................           if((kbd & (ALL_ROWS))!=(ALL_ROWS)) { 
+0044:  MOVF   06,W
+0045:  ANDLW  1E
+0046:  SUBLW  1E
+0047:  BTFSC  03.2
+0048:  GOTO   092
+....................              if((kbd & ROW0)==0) 
+0049:  MOVF   06,W
+004A:  ANDLW  02
+004B:  BTFSS  03.2
+004C:  GOTO   04F
+....................                row=0; 
+004D:  CLRF   27
+004E:  GOTO   063
+....................              else if((kbd & ROW1)==0) 
+004F:  MOVF   06,W
+0050:  ANDLW  04
+0051:  BTFSS  03.2
+0052:  GOTO   056
+....................                row=1; 
+0053:  MOVLW  01
+0054:  MOVWF  27
+0055:  GOTO   063
+....................              else if((kbd & ROW2)==0) 
+0056:  MOVF   06,W
+0057:  ANDLW  08
+0058:  BTFSS  03.2
+0059:  GOTO   05D
+....................                row=2; 
+005A:  MOVLW  02
+005B:  MOVWF  27
+005C:  GOTO   063
+....................              else if((kbd & ROW3)==0) 
+005D:  MOVF   06,W
+005E:  ANDLW  10
+005F:  BTFSS  03.2
+0060:  GOTO   063
+....................                row=3; 
+0061:  MOVLW  03
+0062:  MOVWF  27
+....................              last_key =KEYS[row][col]; 
+0063:  MOVF   27,W
+0064:  MOVWF  28
+0065:  MOVLW  03
+0066:  MOVWF  29
+*
+008B:  MOVF   24,W
+008C:  ADDWF  78,W
+008D:  CALL   004
+008E:  MOVWF  78
+008F:  MOVWF  23
+....................              kbd_down = TRUE; 
+0090:  BSF    22.0
+....................           } else { 
+0091:  GOTO   097
+....................              ++col; 
+0092:  INCF   24,F
+....................              if(col==3) 
+0093:  MOVF   24,W
+0094:  SUBLW  03
+0095:  BTFSC  03.2
+....................                col=0; 
+0096:  CLRF   24
+....................           } 
+....................        } 
+....................       kbd_call_count=0; 
+0097:  CLRF   21
+....................    } 
+....................   set_tris_kbd(ALL_PINS); 
+0098:  MOVLW  FE
+0099:  BSF    03.5
+009A:  MOVWF  06
+....................   return(kchar); 
+009B:  BCF    03.5
+009C:  MOVF   26,W
+009D:  MOVWF  78
+009E:  BCF    0A.3
+009F:  BCF    0A.4
+00A0:  GOTO   0F3 (RETURN)
+.................... } 
+....................  
+....................  
+.................... #use standard_io(b) 
+.................... #use standard_io(c) 
+....................  
+.................... #byte porta = 0x05 //Se declaran las direcciones de los puertos y el registro TRIS 
+.................... #byte trisa = 0x85 
+....................  
+.................... #byte portb = 0x06 
+.................... #byte trisb = 0x86 
+....................  
+.................... #byte portc = 0x07 
+.................... #byte trisc = 0x87 
+....................  
+.................... #byte portd = 0x08 
+.................... #byte trisd = 0x88 
+....................  
+.................... int8 comando; //La variable de tipo entero donde se guardara el dato obtenido del teclado 
+....................  
+....................  
+.................... void main () { 
+*
+00C8:  MOVF   03,W
+00C9:  ANDLW  1F
+00CA:  MOVWF  03
+00CB:  MOVLW  FF
+00CC:  MOVWF  20
+00CD:  BSF    20.3
+00CE:  MOVF   20,W
+00CF:  BSF    03.5
+00D0:  MOVWF  07
+00D1:  BCF    03.5
+00D2:  BSF    20.4
+00D3:  MOVF   20,W
+00D4:  BSF    03.5
+00D5:  MOVWF  07
+00D6:  MOVLW  09
+00D7:  MOVWF  13
+00D8:  MOVLW  28
+00D9:  BCF    03.5
+00DA:  MOVWF  14
+00DB:  BSF    03.5
+00DC:  BSF    14.7
+00DD:  BCF    14.6
+00DE:  BSF    1F.0
+00DF:  BSF    1F.1
+00E0:  BSF    1F.2
+00E1:  BCF    1F.3
+00E2:  BCF    03.7
+....................    trisd = 0x00; 
+*
+00E8:  BSF    03.5
+00E9:  CLRF   08
+....................    portd = 0x00; 
+00EA:  BCF    03.5
+00EB:  CLRF   08
+....................    comando =0; 
+00EC:  CLRF   25
+....................    portc=0x00; 
+00ED:  CLRF   07
+....................     
+....................    kbd_init(); //Inicia configuración de teclado 
+00EE:  GOTO   014
+....................    port_b_pullups(true); //Activa resistencias de pull-up en el puerto b 
+00EF:  BSF    03.5
+00F0:  BCF    01.7
+....................     
+....................    while(1){ 
+....................       comando=kbd_getc(); //Guarda el dato obtenido del teclado en la variable comando 
+00F1:  BCF    03.5
+00F2:  GOTO   017
+00F3:  MOVF   78,W
+00F4:  MOVWF  25
+....................       if(comando!=0){ 
+00F5:  MOVF   25,F
+00F6:  BTFSC  03.2
+00F7:  GOTO   10B
+....................          i2c_start(); //Empieza transmisión de datos en el bus 
+00F8:  BSF    03.5
+00F9:  BSF    11.0
+00FA:  BTFSC  11.0
+00FB:  GOTO   0FA
+....................          i2c_write(0xa0); //Se envía la dirección del esclavo al cual se quiere comunicar 
+00FC:  MOVLW  A0
+00FD:  BCF    03.5
+00FE:  MOVWF  26
+00FF:  CALL   0A1
+....................          i2c_write(comando); //Se escribe el dato obtenido del teclado 
+0100:  MOVF   25,W
+0101:  MOVWF  26
+0102:  CALL   0A1
+....................          i2c_stop(); //Finaliza la transmisión en el bus 
+0103:  BSF    03.5
+0104:  BSF    11.2
+0105:  BTFSC  11.2
+0106:  GOTO   105
+....................          delay_ms(100); //Retardo para eliminar posibles errores 
+0107:  MOVLW  64
+0108:  BCF    03.5
+0109:  MOVWF  26
+010A:  GOTO   0B1
+....................       } 
+010B:  GOTO   0F2
+....................    } 
+.................... } 
+010C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

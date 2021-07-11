@@ -1,0 +1,84 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+005     porta
+006     portb
+006     kbd
+007     portc
+008     PSP_DATA
+008     portd
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     kbd_getc.kbd_call_count
+022.0   kbd_getc.kbd_down
+023     kbd_getc.last_key
+024     kbd_getc.col
+025     comando
+026     kbd_getc.kchar
+026     @delay_ms1.P1
+026     @I2C_WRITEU_1.P2
+027     kbd_getc.row
+028     @MUL88.P1
+028     kbd_getc.@SCRATCH1
+029     @MUL88.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+085     trisa
+086     trisb
+087     trisc
+088     trisd
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  KEYS.call
+000008  KEYS.data
+000014  kbd_init
+000017  kbd_getc
+000067  @MUL88
+0000A1  @I2C_WRITEU_1
+0000B1  @delay_ms1
+0000C8  @cinit1
+0000C8  MAIN
+0000E2  @cinit2
+
+Project Directory:
+    C:\Users\Cjmol_000\Desktop\pic\Digitales\
+
+Project Files:
+    maetro.c                                                [24-jun.-21 19:00  CRC=CF5A40AD]
+    ..\..\..\..\..\Program Files\PICC\devices\16f877.h      [18-abr.-14 16:56  CRC=0C9C6EEB]
+    ..\..\..\..\..\Program Files\PICC\drivers\kbd.c         [23-sep.-10 09:09  CRC=8814BCFC]
+
+Source signature=EC202990
+
+Units:
+    maetro (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   maetro.xsym
+    Errors:      maetro.err
+    Ext Symbols: maetro.esym
+    INHX8:       maetro.hex
+    Symbols:     maetro.sym
+    List:        maetro.lst
+    Debug/COFF:  maetro.cof
+    Project:     maetro.ccspjt
+    Call Tree:   maetro.tre
+    Statistics:  maetro.STA

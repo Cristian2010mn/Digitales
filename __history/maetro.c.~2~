@@ -1,0 +1,16 @@
+#include <16f877a.h>
+#use delay(clock= 4000000)
+#use i2c (MASTER,SDA=PIN_C4, SLOW, SCL = PIN_C5, NOFORCE_SW)
+
+#define use_port_b_kbd TRUE
+#include <kdb.c>
+
+#use standard_io(b)
+#use standard_io(b)
+
+
+
+
+
+
+
